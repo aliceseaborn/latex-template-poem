@@ -1,0 +1,128 @@
+% preamble.tex
+
+% ----------------------------------------* DOCUMENT DEFINITION
+\documentclass[10pt]{article}
+\usepackage[ansiapaper, portrait, margin=1in]{geometry}
+\usepackage[usenames]{color}
+\usepackage[utf8]{inputenc}
+\usepackage[pdftex,dvipsnames]{xcolor}
+
+
+% ----------------------------------------* MATHEMATICS
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amstext}
+\usepackage{esvect}     % Vector arrow symbols
+
+
+% ----------------------------------------* FORMATTING PACKAGES
+\usepackage{fancyhdr}   % Page header/footer support
+\usepackage{enumitem}   % Enumerations environment
+\usepackage{float}      % Floating figures
+\usepackage{longtable}  % Multipage tables
+\usepackage{listings}	% Formats code using the lstlisting environment
+\usepackage{tcolorbox}  % Beamer-style boxes
+\usepackage{xargs}
+\usepackage{titlesec}   % Section format customization
+\usepackage{array}      % Table support
+\usepackage{cite}       % Citations within the document
+\usepackage{verse}		% Poetry formatting tools
+\usepackage{multicol}	% Splitting page columns
+
+% Caligraphic font
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+
+% Todo notes support
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+
+% Figure caption support
+\usepackage[labelfont=bf, skip=2pt]{caption}
+
+
+% ----------------------------------------* MISCELLANEOUS
+\usepackage{lipsum}     % Generate lorem ipsum dummy text
+
+
+% ----------------------------------------* SETTINGS
+
+% Set graphics path
+\graphicspath{ {figures/} }
+
+% Headers and footers
+\renewcommand{\headrulewidth}{0pt}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{}
+\rhead{}
+\lfoot{\today}
+\cfoot{}
+\rfoot{Page \thepage}
+
+
+% ----------------------------------------* FORMAT DEFINITIONS
+
+% Define specific note formats
+\newcommandx{\unsure}[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}}
+\newcommandx{\explain}[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}
+
+% Define section formats
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}[{\titlerule[0.6pt]}]
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\itseries}{\thesubsubsection}{1em}{}
+
+% Define table column formats
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+% Poem environments
+\newcounter{thestanza}
+\setcounter{thestanza}{1}
+\newcommand{\xstanza}[0]{\flagverse{\footnotesize\textit{\roman{thestanza}.}}\refstepcounter{thestanza}}
+\renewcommand*{\thepoemline}{\footnotesize\textit{\arabic{poemline}}}
+
+\newenvironment{singlepoem}[1][0]{
+	\setcounter{thestanza}{1}
+	\verselinenumbersleft
+	\verselinenumfont{}
+	\poemlines{#1}
+	\begin{verse}
+	}
+	{
+	\end{verse}
+	\poemlines{0}
+}
+
+\newenvironment{doublepoem}{
+	\verselinenumbersleft
+	\setcounter{thestanza}{1}
+	\begin{multicols}{2}
+	\begin{verse}
+	}
+	{
+	\end{verse}
+	\end{multicols}
+}
+
+% Define hyperlink behavior
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+% Force longer URLs to wrap-around
+\expandafter\def\expandafter\UrlBreaks\expandafter{\UrlBreaks%  save the current one
+  \do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j%
+  \do\k\do\l\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t%
+  \do\u\do\v\do\w\do\x\do\y\do\z\do\A\do\B\do\C\do\D%
+  \do\E\do\F\do\G\do\H\do\I\do\J\do\K\do\L\do\M\do\N%
+  \do\O\do\P\do\Q\do\R\do\S\do\T\do\U\do\V\do\W\do\X%
+  \do\Y\do\Z}
+
+
+% Fin.
