@@ -28,6 +28,7 @@
 \usepackage{cite}       % Citations within the document
 \usepackage{verse}		% Poetry formatting tools
 \usepackage{multicol}	% Splitting page columns
+\usepackage{chngcntr}	% Allows creation of new titling levels
 
 % Caligraphic font
 \usepackage{calligra}
@@ -66,6 +67,17 @@
 % Define specific note formats
 \newcommandx{\unsure}[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}}
 \newcommandx{\explain}[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}
+
+% Title bars
+\makeatletter
+   \def\vhrulefill{\leavevmode\leaders\hrule height 1ex depth \dimexpr0.4pt-0.7ex\hfill\kern\z@}
+\makeatother
+
+% Define the title format
+\newcounter{poemtitle}
+\titleclass{\poemtitle}{straight}[\part]
+\titleformat{\poemtitle}[runin]{\center\Huge\calligra}{}{0pt}{\vhrulefill\space}[\space\vhrulefill\null\break]
+\titlespacing{\poemtitle}{0pt}{0pt}{0pt}
 
 % Define section formats
 \titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}[{\titlerule[0.6pt]}]
